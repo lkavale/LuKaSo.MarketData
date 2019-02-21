@@ -1,4 +1,4 @@
-﻿using LuKaSo.MarketData.Common.Infrastructure;
+﻿using LuKaSo.MarketData.Infrastructure.Common;
 using System;
 
 namespace LuKaSo.MarketData.Common.ProgressReporter

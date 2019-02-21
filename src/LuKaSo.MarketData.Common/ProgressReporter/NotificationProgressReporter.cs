@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LuKaSo.MarketData.Infrastructure.Common;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 

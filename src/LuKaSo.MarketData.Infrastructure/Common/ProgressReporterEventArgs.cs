@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LuKaSo.MarketData.Common.ProgressReporter
+namespace LuKaSo.MarketData.Infrastructure.Common
 {
     /// <summary>
     /// Event arguments including progress

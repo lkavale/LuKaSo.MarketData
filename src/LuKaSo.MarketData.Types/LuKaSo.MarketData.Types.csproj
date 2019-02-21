@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LuKaSo.MarketData.Common\LuKaSo.MarketData.Common.csproj" />
+    <ProjectReference Include="..\LuKaSo.MarketData.Infrastructure\LuKaSo.MarketData.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
-﻿using LuKaSo.MarketData.Common.Infrastructure;
+﻿using LuKaSo.MarketData.Infrastructure.Common;
 using LuKaSo.MarketData.Types.Instruments;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LuKaSo.MarketData.Types.Downloader
 {

@@ -1,7 +1,6 @@
-﻿using LuKaSo.MarketData.Common.ProgressReporter;
-using System;
+﻿using System;
 
-namespace LuKaSo.MarketData.Common.Infrastructure
+namespace LuKaSo.MarketData.Infrastructure.Common
 {
     /// <summary>
     /// Progress change event handler

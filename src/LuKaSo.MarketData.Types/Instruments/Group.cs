@@ -1,16 +1,17 @@
-﻿using System;
+﻿using LuKaSo.MarketData.Infrastructure.Instruments;
+using System;
 using System.Collections.Generic;
 
 namespace LuKaSo.MarketData.Types.Instruments
 {
-    public class Group : IEquatable<Group>
+    public class Group : IGroup, IEquatable<Group>
     {
         /// <summary>
         /// Constructor
         /// </summary>
         public Group()
         {
-            Symbols = new List<Symbol>();
+            Symbols = new List<ISymbol>();
         }
 
         /// <summary>
@@ -19,6 +20,16 @@ namespace LuKaSo.MarketData.Types.Instruments
         /// <param name="other">Comparison groups</param>
         /// <returns>Is equal</returns>
         public bool Equals(Group other)
+        {
+            return Equals((IGroup)other);
+        }
+
+        /// <summary>
+        /// Equality
+        /// </summary>
+        /// <param name="other">Comparison groups</param>
+        /// <returns>Is equal</returns>
+        public bool Equals(IGroup other)
         {
             return Name == other.Name;
         }
@@ -42,7 +53,7 @@ namespace LuKaSo.MarketData.Types.Instruments
         /// <summary>
         /// Symbols
         /// </summary>
-        public virtual IList<Symbol> Symbols { get; set; }
+        public virtual IList<ISymbol> Symbols { get; set; }
 
         #endregion
     }

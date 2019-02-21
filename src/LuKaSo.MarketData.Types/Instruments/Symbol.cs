@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LuKaSo.MarketData.Infrastructure.Instruments;
+using System;
 using System.Collections.Generic;
 
 namespace LuKaSo.MarketData.Types.Instruments
@@ -6,14 +7,14 @@ namespace LuKaSo.MarketData.Types.Instruments
     /// <summary>
     /// Symbol
     /// </summary>
-    public class Symbol : IEquatable<Symbol>
+    public class Symbol : ISymbol, IEquatable<Symbol>
     {
         /// <summary>
         /// Constructor
         /// </summary>
         public Symbol()
         {
-            Groups = new List<Group>();
+            Groups = new List<IGroup>();
         }
 
         /// <summary>
@@ -23,11 +24,16 @@ namespace LuKaSo.MarketData.Types.Instruments
         /// <returns>Is equal</returns>
         public bool Equals(Symbol other)
         {
-            if (other == null)
-            {
-                return false;
-            }
+            return Equals((ISymbol)other);
+        }
 
+        /// <summary>
+        /// Equality
+        /// </summary>
+        /// <param name="other">Comparison Symbol</param>
+        /// <returns>Is equal</returns>
+        public bool Equals(ISymbol other)
+        {
             return Name == other.Name;
         }
 
@@ -56,7 +62,7 @@ namespace LuKaSo.MarketData.Types.Instruments
         /// <summary>
         /// Group
         /// </summary>
-        public virtual IList<Group> Groups { get; set; }
+        public virtual IList<IGroup> Groups { get; set; }
 
         /// <summary>
         /// Data avalability
