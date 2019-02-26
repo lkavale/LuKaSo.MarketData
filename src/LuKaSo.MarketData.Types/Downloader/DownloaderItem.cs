@@ -1,4 +1,7 @@
 ﻿using LuKaSo.MarketData.Infrastructure.Common;
+using LuKaSo.MarketData.Infrastructure.Downloader;
+using LuKaSo.MarketData.Infrastructure.FileSystem;
+using LuKaSo.MarketData.Infrastructure.Instruments;
 using LuKaSo.MarketData.Types.Instruments;
 using System;
 using System.Collections.Generic;
@@ -8,7 +11,7 @@ namespace LuKaSo.MarketData.Types.Downloader
     /// <summary>
     /// Downloader item
     /// </summary>
-    public class DownloaderItem
+    public class DownloaderItem:IDownloaderItem
     {
         /// <summary>
         /// Constructor
@@ -16,7 +19,7 @@ namespace LuKaSo.MarketData.Types.Downloader
         public DownloaderItem()
         {
             Active = true;
-            Files = new List<DownloaderFile>();
+            Files = new List<IFile>();
             Status = DownloaderItemStatus.Ready;
         }
 
@@ -63,12 +66,12 @@ namespace LuKaSo.MarketData.Types.Downloader
         /// <summary>
         /// Symbol
         /// </summary>
-        public virtual Symbol Symbol { get; set; }
+        public virtual ISymbol Symbol { get; set; }
 
         /// <summary>
         /// Files
         /// </summary>
-        public List<DownloaderFile> Files { get; set; }
+        public IList<IFile> Files { get; set; }
 
         #endregion
     }

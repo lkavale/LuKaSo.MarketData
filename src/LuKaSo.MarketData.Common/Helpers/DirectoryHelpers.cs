@@ -7,14 +7,12 @@ namespace LuKaSo.MarketData.Common.Helpers
         /// <summary>
         /// Create directory if not exists
         /// </summary>
-        /// <param name="fileName">File name</param>
-        public static void DirectoryCreateIfNotExist(string fileName)
+        /// <param name="directoryName">Directory name</param>
+        public static void DirectoryCreateIfNotExist(string directoryName)
         {
-            var path = Path.GetDirectoryName(fileName);
-
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(directoryName))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(directoryName);
             }
         }
     }

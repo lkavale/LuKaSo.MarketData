@@ -2,6 +2,7 @@
 using LuKaSo.MarketData.Infrastructure.Downloader;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -34,7 +35,7 @@ namespace LuKaSo.MarketData.Common.Downloader
         /// <returns></returns>
         public async Task DownloadFileAync(string sourceFile, string destinationFile)
         {
-            DirectoryHelpers.DirectoryCreateIfNotExist(destinationFile);
+            DirectoryHelpers.DirectoryCreateIfNotExist(Path.GetDirectoryName(destinationFile));
 
             using (var webClient = new WebClient())
             {
@@ -46,6 +47,12 @@ namespace LuKaSo.MarketData.Common.Downloader
                 catch (Exception exp)
                 {
                     _log.LogError($"Download of source file failed {sourceFile} failed.", exp);
+
+                    if (File.Exists(destinationFile))
+                    {
+                        File.Delete(destinationFile);
+                    }
+
                     throw;
                 }
             }

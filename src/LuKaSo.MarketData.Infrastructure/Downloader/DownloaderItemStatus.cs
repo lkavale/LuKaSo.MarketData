@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LuKaSo.MarketData.Types.Downloader
+namespace LuKaSo.MarketData.Infrastructure.Downloader
 {
     /// <summary>
     /// Downloader item status 

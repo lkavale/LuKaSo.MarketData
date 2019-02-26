@@ -1,11 +1,13 @@
-﻿using System;
+﻿using LuKaSo.MarketData.Infrastructure.Downloader;
+using LuKaSo.MarketData.Infrastructure.FileSystem;
+using System;
 
-namespace LuKaSo.MarketData.Types.Downloader
+namespace LuKaSo.MarketData.Types.FileSystem
 {
     /// <summary>
     /// Download file
     /// </summary>
-    public class DownloaderFile
+    public class File : IFile
     {
         #region Properties
 
@@ -15,14 +17,14 @@ namespace LuKaSo.MarketData.Types.Downloader
         public DateTime Time { get; set; }
 
         /// <summary>
-        /// URL
+        /// URL of source file
         /// </summary>
-        public string Url { get; set; }
+        public string SourceFile { get; set; }
 
         /// <summary>
-        /// File
+        /// Destination file
         /// </summary>
-        public string File { get; set; }
+        public string DestinationFile { get; set; }
 
         #endregion
 
@@ -31,7 +33,7 @@ namespace LuKaSo.MarketData.Types.Downloader
         /// <summary>
         /// Downloader item
         /// </summary>
-        public virtual DownloaderItem DownloaderItem { get; set; }
+        public virtual IDownloaderItem DownloaderItem { get; set; }
 
         #endregion
     }

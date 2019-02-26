@@ -3,17 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Ducascopy", "src\LuKaSo.MarketData.Ducascopy\LuKaSo.MarketData.Ducascopy.csproj", "{6B269151-21B8-4CD8-9DA5-10799ABE203F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Ducascopy", "src\LuKaSo.MarketData.Ducascopy\LuKaSo.MarketData.Ducascopy.csproj", "{6B269151-21B8-4CD8-9DA5-10799ABE203F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Ducascopy.Tests", "tests\LuKaSo.MarketData.Ducascopy.Tests\LuKaSo.MarketData.Ducascopy.Tests.csproj", "{124ACCB2-39E7-47BC-8D78-933F9370D747}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Ducascopy.Tests", "tests\LuKaSo.MarketData.Ducascopy.Tests\LuKaSo.MarketData.Ducascopy.Tests.csproj", "{124ACCB2-39E7-47BC-8D78-933F9370D747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Infrastructure", "src\LuKaSo.MarketData.Infrastructure\LuKaSo.MarketData.Infrastructure.csproj", "{13FF34BB-8BE8-4428-989B-1B134119D444}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Infrastructure", "src\LuKaSo.MarketData.Infrastructure\LuKaSo.MarketData.Infrastructure.csproj", "{13FF34BB-8BE8-4428-989B-1B134119D444}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Types", "src\LuKaSo.MarketData.Types\LuKaSo.MarketData.Types.csproj", "{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Types", "src\LuKaSo.MarketData.Types\LuKaSo.MarketData.Types.csproj", "{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Common", "src\LuKaSo.MarketData.Common\LuKaSo.MarketData.Common.csproj", "{EE206B99-931F-4F2B-AEC4-B153FE299CC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Common", "src\LuKaSo.MarketData.Common\LuKaSo.MarketData.Common.csproj", "{EE206B99-931F-4F2B-AEC4-B153FE299CC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Common.Tests", "tests\LuKaSo.MarketData.Common.Tests\LuKaSo.MarketData.Common.Tests.csproj", "{A45892F9-1844-416E-9E28-9B98BF718AE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Common.Tests", "tests\LuKaSo.MarketData.Common.Tests\LuKaSo.MarketData.Common.Tests.csproj", "{A45892F9-1844-416E-9E28-9B98BF718AE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA1BC972-9A97-4E55-A238-6DD48D19EEBF}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Ducascopy.md = docs\Ducascopy.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
