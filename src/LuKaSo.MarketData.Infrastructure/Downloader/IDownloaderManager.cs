@@ -6,9 +6,9 @@ namespace LuKaSo.MarketData.Infrastructure.Downloader
 {
     public interface IDownloaderManager
     {
-        void UpdateDownloaderStatus(IList<IDownloaderItem> downloaderItems);
-
-        //void Synchronize
-
+        void Update(IList<IDownloaderItem> downloaderItems);
+        void Update(IDownloaderItem downloaderItem);
+        void Download(IList<IDownloaderItem> downloaderItems);
+        void Download(IDownloaderItem downloaderItem);
     }
 }

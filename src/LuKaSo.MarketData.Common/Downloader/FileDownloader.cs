@@ -33,7 +33,7 @@ namespace LuKaSo.MarketData.Common.Downloader
         /// <param name="sourceFile"></param>
         /// <param name="destinationFile"></param>
         /// <returns></returns>
-        public async Task DownloadFileAync(string sourceFile, string destinationFile)
+        public async Task DownloadFileAync(Uri sourceFile, string destinationFile)
         {
             DirectoryHelpers.DirectoryCreateIfNotExist(Path.GetDirectoryName(destinationFile));
 

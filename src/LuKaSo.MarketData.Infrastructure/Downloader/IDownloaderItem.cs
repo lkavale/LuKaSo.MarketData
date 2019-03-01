@@ -51,6 +51,6 @@ namespace LuKaSo.MarketData.Infrastructure.Downloader
         /// <summary>
         /// Files
         /// </summary>
-        IList<IFile> Files { get; set; }
+        IEnumerable<IFile> Files { get; set; }
     }
 }

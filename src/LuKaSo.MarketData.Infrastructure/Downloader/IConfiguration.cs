@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 
 namespace LuKaSo.MarketData.Infrastructure.Downloader
 {
@@ -14,6 +13,6 @@ namespace LuKaSo.MarketData.Infrastructure.Downloader
         /// <summary>
         /// Base source
         /// </summary>
-        string BaseSource { get; }
+        Uri BaseSource { get; }
     }
 }

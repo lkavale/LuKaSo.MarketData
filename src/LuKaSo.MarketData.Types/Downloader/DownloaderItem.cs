@@ -71,7 +71,7 @@ namespace LuKaSo.MarketData.Types.Downloader
         /// <summary>
         /// Files
         /// </summary>
-        public IList<IFile> Files { get; set; }
+        public IEnumerable<IFile> Files { get; set; }
 
         #endregion
     }

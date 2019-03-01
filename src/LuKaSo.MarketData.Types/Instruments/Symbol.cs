@@ -50,6 +50,11 @@ namespace LuKaSo.MarketData.Types.Instruments
         public string Description { get; set; }
 
         /// <summary>
+        /// Directory name
+        /// </summary>
+        public string DirectoryName { get { return Name; } set { } }
+
+        /// <summary>
         /// Digits
         /// </summary>
         public int Digits { get; set; }

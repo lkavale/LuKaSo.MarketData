@@ -1,4 +1,6 @@
 ﻿using LuKaSo.MarketData.Infrastructure.Downloader;
+using System;
+using System.IO;
 
 namespace LuKaSo.MarketData.Types.Downloader
 {
@@ -7,7 +9,7 @@ namespace LuKaSo.MarketData.Types.Downloader
         /// <summary>
         /// Default data path
         /// </summary>
-        private const string _defaultDataPath = "C:\\Data\\Ducascopy";
+        private const string _defaultDataPath = "C:/Data/Ducascopy/";
 
         private string _dataPath;
 
@@ -31,11 +33,11 @@ namespace LuKaSo.MarketData.Types.Downloader
         /// <summary>
         /// Base source
         /// </summary>
-        public string BaseSource
+        public Uri BaseSource
         {
             get
             {
-                return "https://www.dukascopy.com/datafeed/";
+                return new Uri("http://www.dukascopy.com/datafeed/");
             }
         }
     }

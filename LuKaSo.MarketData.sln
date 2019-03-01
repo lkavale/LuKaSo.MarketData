@@ -17,8 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Common.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA1BC972-9A97-4E55-A238-6DD48D19EEBF}"
 	ProjectSection(SolutionItems) = preProject
+		Datafeed.md = Datafeed.md
 		docs\Ducascopy.md = docs\Ducascopy.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lukaso.MarketData.Cli", "src\Lukaso.MarketData.Cli\Lukaso.MarketData.Cli.csproj", "{FC7F8448-CBA8-4C5D-8728-F9AE52469596}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +53,10 @@ Global
 		{A45892F9-1844-416E-9E28-9B98BF718AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A45892F9-1844-416E-9E28-9B98BF718AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A45892F9-1844-416E-9E28-9B98BF718AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

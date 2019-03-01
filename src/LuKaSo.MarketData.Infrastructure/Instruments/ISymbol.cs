@@ -16,6 +16,11 @@ namespace LuKaSo.MarketData.Infrastructure.Instruments
         string Description { get; set; }
 
         /// <summary>
+        /// Directory name
+        /// </summary>
+        string DirectoryName { get; set; }
+
+        /// <summary>
         /// Digits
         /// </summary>
         int Digits { get; set; }

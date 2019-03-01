@@ -1,4 +1,5 @@
 ﻿using LuKaSo.MarketData.Ducascopy.Instruments;
+using LuKaSo.MarketData.Infrastructure.Downloader;
 using LuKaSo.MarketData.Infrastructure.FileSystem;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,15 @@ namespace LuKaSo.MarketData.Ducascopy.FileSystem
         /// <summary>
         /// Base directory
         /// </summary>
-        protected string _baseDirectory;
+        protected IConfiguration _configuration;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="baseDirectory"></param>
-        public DucascopyFileManager(string baseDirectory)
+        public DucascopyFileManager(IConfiguration configuration)
         {
-            _baseDirectory = baseDirectory;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace LuKaSo.MarketData.Ducascopy.FileSystem
         /// <returns></returns>
         public DateTime GetStartDateTime(DucascopySymbol symbol)
         {
-            var instrumentDirectory = Path.Combine(_baseDirectory, symbol.Name);
+            var instrumentDirectory = Path.Combine(_configuration.DataPath, symbol.Name);
 
             var year = GetSubdirectories(instrumentDirectory)
                 .Where(d => int.TryParse(d, out int dYear) && dYear > 1900 && dYear < 2100)
@@ -58,7 +59,7 @@ namespace LuKaSo.MarketData.Ducascopy.FileSystem
         /// <returns></returns>
         public DateTime GetEndDateTime(DucascopySymbol symbol)
         {
-            var instrumentDirectory = Path.Combine(_baseDirectory, symbol.Name);
+            var instrumentDirectory = Path.Combine(_configuration.DataPath, symbol.Name);
 
             var year = GetSubdirectories(instrumentDirectory)
                 .Where(d => int.TryParse(d, out int dYear) && dYear > 1900 && dYear < 2100)
@@ -86,7 +87,7 @@ namespace LuKaSo.MarketData.Ducascopy.FileSystem
         /// <returns></returns>
         public IEnumerable<DateTime> GetDateTimes(DucascopySymbol symbol)
         {
-            var instrumentDirectory = Path.Combine(_baseDirectory, symbol.Name);
+            var instrumentDirectory = Path.Combine(_configuration.DataPath, symbol.Name);
 
             return ResolveYears(instrumentDirectory);
         }
@@ -190,7 +191,7 @@ namespace LuKaSo.MarketData.Ducascopy.FileSystem
         {
             if (!Directory.Exists(baseDirectory))
             {
-                throw new ArgumentException("Given base directory is not exists.");
+                return new List<string>();
             }
 
             return Directory.GetDirectories(baseDirectory)

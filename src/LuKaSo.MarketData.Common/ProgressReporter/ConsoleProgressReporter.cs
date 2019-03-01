@@ -13,7 +13,7 @@ namespace LuKaSo.MarketData.Common.ProgressReporter
         private readonly TimeSpan animationInterval = TimeSpan.FromSeconds(1.0 / 8);
         private const string animation = @"|/-\";
 
-        private readonly Timer timer;
+        private Timer timer;
 
         private readonly double currentProgress = 0;
         private string currentText = string.Empty;
@@ -23,6 +23,17 @@ namespace LuKaSo.MarketData.Common.ProgressReporter
 
         public ConsoleProgressReporter()
         {
+
+        }
+
+        /// <summary>
+        /// Starts progress
+        /// </summary>
+        /// <param name="totalItems"></param>
+        public override void Start(long totalItems)
+        {
+            base.Start(totalItems);
+
             timer = new Timer(TimerHandler);
 
             // A progress bar is only for temporary display in a console window.

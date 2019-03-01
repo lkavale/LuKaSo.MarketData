@@ -1,4 +1,5 @@
 ﻿using LuKaSo.MarketData.Common.Downloader;
+using LuKaSo.MarketData.Common.Extensions;
 using LuKaSo.MarketData.Common.Helpers;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,8 +46,8 @@ namespace LuKaSo.MarketData.Common.Tests
         [TestMethod]
         public async Task FileDownloaderOk()
         {
-            var file = "01h_ticks.bi5";
-            var source = Path.Combine("http://www.dukascopy.com/datafeed/EURUSD/2018/11/31/", file);
+            var file = "00h_ticks.bi5";
+            var source = new Uri("http://www.dukascopy.com/datafeed/EURUSD/2018/11/31/").Append(file);
             var destination = Path.Combine(_path, file);
 
             await _downloader.DownloadFileAync(source, destination);
@@ -58,8 +59,8 @@ namespace LuKaSo.MarketData.Common.Tests
         [TestMethod]
         public async Task FileDownloaderNotExists()
         {
-            var file = "01h_ticks.bi5";
-            var source = Path.Combine("http://www.dukascopy.com/datafeed/EURUSD/2018/12/31/", file);
+            var file = "00h_ticks.bi5";
+            var source = new Uri("http://www.dukascopy.com/datafeed/EURUSD/2018/12/31/").Append(file);
             var destination = Path.Combine(_path, file);
 
             await Assert.ThrowsExceptionAsync<WebException>(async () => await _downloader.DownloadFileAync(source, destination));

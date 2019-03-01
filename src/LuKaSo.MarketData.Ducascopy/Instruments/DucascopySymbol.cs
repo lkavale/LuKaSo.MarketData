@@ -1,22 +1,24 @@
-﻿using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed;
-using LuKaSo.MarketData.Infrastructure.Instruments;
-using LuKaSo.MarketData.Types.Instruments;
-using Newtonsoft.Json;
-using System;
+﻿using LuKaSo.MarketData.Infrastructure.Instruments;
 using System.Collections.Generic;
 
 namespace LuKaSo.MarketData.Ducascopy.Instruments
 {
     public class DucascopySymbol : ISymbol
     {
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Digits { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IList<IGroup> Groups { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DucascopySymbol()
+        {
+            //Groups = new List<DucascopyGroup>();
+        }
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string DirectoryName { get; set; }
+        public int Digits { get; set; }
+        public IList<IGroup> Groups { get; set; }
 
         public bool Equals(ISymbol other)
         {
-            throw new NotImplementedException();
+            return Name == other.Name;
         }
     }
 }
