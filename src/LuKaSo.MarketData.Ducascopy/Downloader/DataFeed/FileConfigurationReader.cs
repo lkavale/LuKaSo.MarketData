@@ -1,4 +1,5 @@
 ﻿using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed.Models;
+using LuKaSo.MarketData.Ducascopy.Infrastructure;
 using Newtonsoft.Json;
 using System.IO;
 using System.Reflection;
@@ -9,7 +10,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
     /// <summary>
     /// Ducascopy configuration
     /// </summary>
-    public class ConfigurationReader
+    public class FileConfigurationReader : IConfigurationReader
     {
         /// <summary>
         /// Path to DucascopyDataFeedConfiguration
@@ -19,7 +20,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
         /// <summary>
         /// Constructor
         /// </summary>
-        public ConfigurationReader() : this(Path.GetDirectoryName(Assembly.GetAssembly(typeof(ConfigurationReader)).Location))
+        public FileConfigurationReader() : this(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileConfigurationReader)).Location))
         {
         }
 
@@ -27,7 +28,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
         /// Constructor with specified path to config file
         /// </summary>
         /// <param name="path"></param>
-        public ConfigurationReader(string path)
+        public FileConfigurationReader(string path)
         {
             _path = Path.Combine(path, "DucascopyDataFeedConfiguration.json");
 

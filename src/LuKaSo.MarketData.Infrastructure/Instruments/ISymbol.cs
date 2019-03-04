@@ -16,6 +16,16 @@ namespace LuKaSo.MarketData.Infrastructure.Instruments
         string Description { get; set; }
 
         /// <summary>
+        /// Base currency
+        /// </summary>
+        string BaseCurrency { get; set; }
+
+        /// <summary>
+        /// Quota currency
+        /// </summary>
+        string QuotaCurrency { get; set; }
+
+        /// <summary>
         /// Directory name
         /// </summary>
         string DirectoryName { get; set; }
@@ -24,6 +34,11 @@ namespace LuKaSo.MarketData.Infrastructure.Instruments
         /// Digits
         /// </summary>
         int Digits { get; set; }
+
+        /// <summary>
+        /// Start date
+        /// </summary>
+        DateTime StartDate { get; set; }
 
         /// <summary>
         /// Group

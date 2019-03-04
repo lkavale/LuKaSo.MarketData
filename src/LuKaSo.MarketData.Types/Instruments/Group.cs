@@ -55,6 +55,16 @@ namespace LuKaSo.MarketData.Types.Instruments
         /// </summary>
         public virtual IList<ISymbol> Symbols { get; set; }
 
+        /// <summary>
+        /// Groups
+        /// </summary>
+        public virtual IList<IGroup> Groups { get; set; }
+
+        /// <summary>
+        /// Parrent
+        /// </summary>
+        public virtual IGroup Parent { get; set; }
+
         #endregion
     }
 }

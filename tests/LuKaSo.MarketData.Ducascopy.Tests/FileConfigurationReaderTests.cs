@@ -5,18 +5,18 @@ using System.IO;
 namespace LuKaSo.MarketData.Ducascopy.Tests
 {
     [TestClass]
-    public class DataFeedConfigurationReaderTests
+    public class FileConfigurationReaderTests
     {
         [TestMethod]
         public void TestInvalidPath()
         {
-            Assert.ThrowsException<FileNotFoundException>(() => new ConfigurationReader("C:/"));
+            Assert.ThrowsException<FileNotFoundException>(() => new FileConfigurationReader("C:/"));
         }
 
         [TestMethod]
         public void TestInAssemblyPath()
         {
-            var reader = new ConfigurationReader();
+            var reader = new FileConfigurationReader();
             reader.Read();
         }
     }

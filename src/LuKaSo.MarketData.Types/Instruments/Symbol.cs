@@ -52,13 +52,34 @@ namespace LuKaSo.MarketData.Types.Instruments
         /// <summary>
         /// Directory name
         /// </summary>
-        public string DirectoryName { get { return Name; } set { } }
+        public string DirectoryName
+        {
+            get
+            {
+                return Name;
+            }
+            set { }
+        }
 
         /// <summary>
         /// Digits
         /// </summary>
         public int Digits { get; set; }
 
+        /// <summary>
+        /// Base currency
+        /// </summary>
+        public string BaseCurrency { get; set; }
+
+        /// <summary>
+        /// Qoute currency
+        /// </summary>
+        public string QuotaCurrency { get; set; }
+
+        /// <summary>
+        /// Start time of data feed
+        /// </summary>
+        public DateTime StartDate { get; set; }
 
         #endregion
 

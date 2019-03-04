@@ -38,6 +38,15 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed.Models
         }
 
         /// <summary>
+        /// Get digits
+        /// </summary>
+        /// <returns></returns>
+        public int GetDigits()
+        {
+            return (int)Math.Abs(Math.Log10(PipValue));
+        }
+
+        /// <summary>
         /// Title, "title": "AAL.GB/GBX",
         /// </summary>
         [JsonProperty("title")]
