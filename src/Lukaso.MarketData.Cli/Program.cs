@@ -35,6 +35,8 @@ namespace Lukaso.MarketData.Cli
 
         private static void RunDownload(DownloaderOption options)
         {
+            Console.WriteLine($"Downloading data for {options.Instrument}: ");
+
             var item = options.CreateDownloaderItem();
             item.Status = DownloaderItemStatus.Ready;
             item.Indicator = new ConsoleProgressReporter();
@@ -43,6 +45,8 @@ namespace Lukaso.MarketData.Cli
 
             manager.Update(item);
             manager.Download(item);
+
+            Console.WriteLine($"Download completed.");
         }
 
         private static void HandleError(IEnumerable<Error> errors)

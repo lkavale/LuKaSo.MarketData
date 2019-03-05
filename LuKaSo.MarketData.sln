@@ -17,8 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Common.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA1BC972-9A97-4E55-A238-6DD48D19EEBF}"
 	ProjectSection(SolutionItems) = preProject
-		Datafeed.md = Datafeed.md
+		docs\Datafeed.md = docs\Datafeed.md
 		docs\Ducascopy.md = docs\Ducascopy.md
+		LICENSE = LICENSE
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lukaso.MarketData.Cli", "src\Lukaso.MarketData.Cli\Lukaso.MarketData.Cli.csproj", "{FC7F8448-CBA8-4C5D-8728-F9AE52469596}"

@@ -1,6 +1,8 @@
 ﻿using LuKaSo.MarketData.Common.Downloader;
 using LuKaSo.MarketData.Ducascopy.Downloader;
+using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed;
 using LuKaSo.MarketData.Ducascopy.FileSystem;
+using LuKaSo.MarketData.Ducascopy.Infrastructure;
 using LuKaSo.MarketData.Ducascopy.Instruments;
 using LuKaSo.MarketData.Infrastructure.Downloader;
 using LuKaSo.MarketData.Infrastructure.FileSystem;
@@ -13,6 +15,9 @@ namespace LuKaSo.MarketData.Ducascopy
         public static IServiceCollection AddDucascopy(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IConfiguration>(configuration);
+            services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
+            services.AddSingleton<IDataFeedConfiguration, DucacopyDataFeedConfiguration>();
+            services.AddSingleton<IDataFeedConfiguration, DucacopyDataFeedConfiguration>();
             services.AddSingleton<IFileNameGenerator<DucascopySymbol>, DucascopyFileNameGenerator>();
             services.AddScoped<IFileManager<DucascopySymbol>, DucascopyFileManager>();
             services.AddScoped<IFileChecker<DucascopySymbol>, DucascopyFileChecker>();

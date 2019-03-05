@@ -45,7 +45,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
         }
 
         [TestMethod]
-        public void TestSymbols()
+        public void Symbols()
         {
             Assert.AreEqual(_dataFeedConfiguration.Symbols.Count(), _configuration.Symbols.Count());
 
@@ -62,7 +62,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
         }
 
         [TestMethod]
-        public void TestGroups()
+        public void Groups()
         {
             Assert.AreEqual(_dataFeedConfiguration.Groups.Count(), _configuration.Groups.Count());
 
@@ -79,7 +79,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
         }
 
         [TestMethod]
-        public void TestTopLevelGroups()
+        public void TopLevelGroups()
         {
             Assert.AreEqual(_dataFeedConfiguration.Groups.Where(g => string.IsNullOrEmpty(g.Value.Parent)).Count(), _configuration.TopLevelGroups.Count());
 
@@ -97,7 +97,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
         }
 
         [TestMethod]
-        public void TestSymbolHierarchy()
+        public void SymbolHierarchy()
         {
             _dataFeedConfiguration.Groups.Values
                 .ToList()
@@ -114,7 +114,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
         }
 
         [TestMethod]
-        public void TestGroupHierarchy()
+        public void GroupHierarchy()
         {
             _dataFeedConfiguration.Groups.Values
                 .ToList()
@@ -131,6 +131,23 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
                         Assert.IsTrue(string.IsNullOrEmpty(g.Parent));
                     }
                 });
+        }
+
+        [TestMethod]
+        public void SymbolExists()
+        {
+            _dataFeedConfiguration.Symbols
+                .ToList()
+                .ForEach(s =>
+                {
+                    Assert.IsTrue(_configuration.IsSymbolExists(s.Key));
+                });
+        }
+
+        [TestMethod]
+        public void SymbolNotExists()
+        {
+            Assert.IsFalse(_configuration.IsSymbolExists("EURUSD"));
         }
     }
 }

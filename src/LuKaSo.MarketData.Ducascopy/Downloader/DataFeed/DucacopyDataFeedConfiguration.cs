@@ -79,7 +79,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
         /// <returns></returns>
         public bool IsSymbolExists(string symbolName)
         {
-            return _symbols.Any(s => s.Id == symbolName);
+            return _symbols.Any(s => s.Name == symbolName);
         }
 
         private IList<DucascopySymbol> ExtractSymbols(Configuration dataFeedConfiguration)
@@ -88,7 +88,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
                 .Select(s => new DucascopySymbol()
                 {
                     Id = s.Key,
-                    Name = s.Value.Name,
+                    Name = s.Value.DataFeedName,
                     Description = s.Value.Description,
                     DirectoryName = s.Value.DataFeedName,
                     BaseCurrency = s.Value.BaseCurrency,

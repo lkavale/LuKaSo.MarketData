@@ -1,4 +1,5 @@
 ﻿using LuKaSo.MarketData.Common.Extensions;
+using LuKaSo.MarketData.Ducascopy.Infrastructure;
 using LuKaSo.MarketData.Ducascopy.Instruments;
 using LuKaSo.MarketData.Infrastructure.Downloader;
 using LuKaSo.MarketData.Infrastructure.FileSystem;
@@ -14,15 +15,14 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
         private readonly IFileChecker<DucascopySymbol> _fileChecker;
         private readonly IFileDownloader _fileDownloader;
         private readonly IConfiguration _configuration;
+        private readonly IDataFeedConfiguration _dataFeedConfiguration;
 
-        public DucascopyDownloaderManager(IFileChecker<DucascopySymbol> fileChecker, IFileDownloader fileDownloader, IConfiguration configuration)
+        public DucascopyDownloaderManager(IFileChecker<DucascopySymbol> fileChecker, IFileDownloader fileDownloader, IConfiguration configuration, IDataFeedConfiguration dataFeedConfiguration)
         {
             _fileChecker = fileChecker;
             _fileDownloader = fileDownloader;
             _configuration = configuration;
-
-            /*var configurationReader = new ConfigurationReader();
-            _configuration = configurationReader.Read();*/
+            _dataFeedConfiguration = dataFeedConfiguration;
         }
 
         public void Update(IList<IDownloaderItem> downloaderItems)
@@ -38,6 +38,8 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
 
         public void Update(IDownloaderItem downloaderItem)
         {
+            CheckedForAvailability(downloaderItem);
+
             downloaderItem.Files = _fileChecker.GetMissingFiles((DucascopySymbol)downloaderItem.Symbol, downloaderItem.DateFromDesired ?? downloaderItem.DateFrom, downloaderItem.DateToDesired ?? downloaderItem.DateTo);
         }
 
@@ -54,6 +56,8 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
 
         public void Download(IDownloaderItem downloaderItem)
         {
+            CheckedForAvailability(downloaderItem);
+
             int i = 0;
             downloaderItem.Indicator.Start(downloaderItem.Files.Count());
 
@@ -64,6 +68,14 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
             }
 
             downloaderItem.Indicator.Finish();
+        }
+
+        public void CheckedForAvailability(IDownloaderItem downloaderItem)
+        {
+            if (!_dataFeedConfiguration.IsSymbolExists(downloaderItem.Symbol.Name))
+            {
+                throw new ArgumentException($"Ducascopy does not provide data for symbol {downloaderItem.Symbol.Name}");
+            }
         }
     }
 }
