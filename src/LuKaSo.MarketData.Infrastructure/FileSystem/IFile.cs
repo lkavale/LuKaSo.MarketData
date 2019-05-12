@@ -13,7 +13,7 @@ namespace LuKaSo.MarketData.Infrastructure.FileSystem
         /// <summary>
         /// URL of source file
         /// </summary>
-        string SourceFile { get; set; }
+        Uri SourceFile { get; set; }
 
         /// <summary>
         /// Destination file

@@ -1,0 +1,184 @@
+﻿{
+  "instruments": {
+    "BAACETV": {
+      "name": "BAACETV",
+      "title": "CETV",
+      "isin": "BMG200452024",
+      "notation_id": "12418766",
+      "description": "Central European Media Enterprises Ltd.",
+      "pipValue": 1,
+      "base_currency": "CETV",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAACEZ": {
+      "name": "BAACEZ",
+      "title": "ČEZ",
+      "isin": "CZ0005112300",
+      "notation_id": "1528746",
+      "description": "ČEZ, a.s.",
+      "pipValue": 1,
+      "base_currency": "ČEZ",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAAERBAG": {
+      "name": "BAAERBAG",
+      "title": "ERSTE GROUP BANK",
+      "isin": "AT0000652011",
+      "notation_id": "6190504",
+      "description": "Erste Group Bank AG",
+      "pipValue": 1,
+      "base_currency": "ERSTE GROUP BANK",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAAGECBA": {
+      "name": "BAAGECBA",
+      "title": "MONETA MONEY BANK",
+      "isin": "CZ0008040318",
+      "notation_id": "160871483",
+      "description": "Moneta Money Bank, a.s.",
+      "pipValue": 1,
+      "base_currency": "MONETA MONEY BANK",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BABKOFOL": {
+      "name": "BABKOFOL",
+      "title": "KOFOLA ČS",
+      "isin": "CZ0009000121",
+      "notation_id": "143626449",
+      "description": "Kofola ČeskoSlovensko, a.s.",
+      "pipValue": 1,
+      "base_currency": "KOFOLA ČS",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAATELEC": {
+      "name": "BAATELEC",
+      "title": "O2 C.R.",
+      "isin": "CZ0009093209",
+      "notation_id": "111378",
+      "description": "O2 Czech Republic, a.s.",
+      "pipValue": 1,
+      "base_currency": "O2 C.R.",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAATMR": {
+      "name": "BAATMR",
+      "title": "TMR",
+      "isin": "SK1120010287",
+      "notation_id": "72089263",
+      "description": "Tatry Mountain Resorts, a.s.",
+      "pipValue": 1,
+      "base_currency": "TMR",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAAVGP": {
+      "name": "BAAVGP",
+      "title": "VPG",
+      "isin": "BE0003878957",
+      "notation_id": "20681030",
+      "description": "VGP NV",
+      "pipValue": 1,
+      "base_currency": "VPG",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAAVIG": {
+      "name": "BAAVIG",
+      "title": "VIG",
+      "isin": "AT0000908504",
+      "notation_id": "21582060",
+      "description": "Vienna Insurance Group",
+      "pipValue": 1,
+      "base_currency": "VIG",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAAKOMB": {
+      "name": "BAAKOMB",
+      "title": "VIG",
+      "isin": "CZ0008019106",
+      "notation_id": "111264",
+      "description": "Komerční banka, a.s.",
+      "pipValue": 1,
+      "base_currency": "KOMERČNÍ BANKA",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    },
+    "BAAPEGAS": {
+      "name": "BAAPEGAS",
+      "title": "PFNONWOVENS",
+      "isin": "LU0275164910",
+      "notation_id": "16376750",
+      "description": "PFNonwovens, a.s.",
+      "pipValue": 1,
+      "base_currency": "PFNONWOVENS",
+      "quote_currency": "CZK",
+      "tag_list": [
+        "PrimaryMarket"
+      ],
+      "history_start_day": 1294099200000
+    }
+  },
+  "groups": {
+    "PrimaryMarket": {
+      "id": "PrimaryMarket",
+      "title": "Primary market",
+      "instruments": [
+      ]
+    },
+    "StandardMarket": {
+      "id": "StandardMarket",
+      "title": "Standard market",
+      "instruments": [
+      ]
+    },
+    "FreeMarket": {
+      "id": "FreeMarket",
+      "title": "Free market",
+      "instruments": [
+      ]
+    },
+    "StartMarket": {
+      "id": "StartMarket",
+      "title": "Start market",
+      "instruments": [
+      ]
+    }
+  }
+}

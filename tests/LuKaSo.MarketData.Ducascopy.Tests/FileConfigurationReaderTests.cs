@@ -1,4 +1,6 @@
+using LuKaSo.MarketData.Common.Downloader.DataFeed;
 using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed;
+using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
@@ -10,13 +12,13 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
         [TestMethod]
         public void TestInvalidPath()
         {
-            Assert.ThrowsException<FileNotFoundException>(() => new FileConfigurationReader("C:/"));
+            Assert.ThrowsException<FileNotFoundException>(() => new FileConfigurationReader<Configuration>("C:/", "DucascopyDataFeedConfiguration.json"));
         }
 
         [TestMethod]
         public void TestInAssemblyPath()
         {
-            var reader = new FileConfigurationReader();
+            var reader = new FileConfigurationReader<Configuration>("DucascopyDataFeedConfiguration.json");
             reader.Read();
         }
     }

@@ -1,26 +1,25 @@
-﻿using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed.Models;
-using LuKaSo.MarketData.Ducascopy.Infrastructure;
+﻿using LuKaSo.MarketData.Infrastructure.Downloader.DataFeed;
 using Newtonsoft.Json;
 using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
+namespace LuKaSo.MarketData.Common.Downloader.DataFeed
 {
     /// <summary>
-    /// Ducascopy configuration
+    /// Datafeed configuration file reader
     /// </summary>
-    public class FileConfigurationReader : IConfigurationReader
+    public class FileConfigurationReader<T> : IConfigurationReader<T>
     {
         /// <summary>
-        /// Path to DucascopyDataFeedConfiguration
+        /// Path to configuration file
         /// </summary>
         private readonly string _path;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public FileConfigurationReader() : this(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileConfigurationReader)).Location))
+        public FileConfigurationReader(string fileName) : this(Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileConfigurationReader<>)).Location), fileName)
         {
         }
 
@@ -28,9 +27,9 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
         /// Constructor with specified path to config file
         /// </summary>
         /// <param name="path"></param>
-        public FileConfigurationReader(string path)
+        public FileConfigurationReader(string path, string fileName)
         {
-            _path = Path.Combine(path, "DucascopyDataFeedConfiguration.json");
+            _path = Path.Combine(path, fileName);
 
             if (!File.Exists(_path))
             {
@@ -41,14 +40,14 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
         /// <summary>
         /// Configuration
         /// </summary>
-        public Configuration Read()
+        public T Read()
         {
             using (var stream = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.Read))
             using (var reader = new StreamReader(stream, Encoding.UTF8))
             using (var jsonReader = new JsonTextReader(reader))
             {
                 var serializer = new JsonSerializer();
-                return serializer.Deserialize<Configuration>(jsonReader);
+                return serializer.Deserialize<T>(jsonReader);
             }
         }
     }

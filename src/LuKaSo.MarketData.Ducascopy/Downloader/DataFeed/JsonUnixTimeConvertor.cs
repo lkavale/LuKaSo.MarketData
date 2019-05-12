@@ -28,7 +28,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
         /// <returns></returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var ms = long.Parse((string)reader.Value.ToString());
+            var ms = long.Parse(reader.Value.ToString());
             return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(ms);
         }
 
@@ -46,7 +46,6 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
             }
 
             var dt = (DateTime)value;
-
             var ms = (long)dt.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds;
 
             if (ms < 0)

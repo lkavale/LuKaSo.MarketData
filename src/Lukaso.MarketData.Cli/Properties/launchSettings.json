@@ -2,7 +2,7 @@
   "profiles": {
     "Lukaso.MarketData.Cli": {
       "commandName": "Project",
-      "commandLineArgs": "download -i EURUSD -f 2017-12-01 -t 2018-01-01"
+      "commandLineArgs": "download -s Ducascopy -i EURCHF -f 2018-01-01 -t 2018-05-10"
     }
   }
 }

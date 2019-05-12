@@ -1,6 +1,8 @@
-﻿using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed;
+﻿using LuKaSo.MarketData.Common.Instruments;
+using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed;
 using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed.Models;
-using LuKaSo.MarketData.Ducascopy.Infrastructure;
+using LuKaSo.MarketData.Ducascopy.Instruments;
+using LuKaSo.MarketData.Infrastructure.Downloader.DataFeed;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -9,9 +11,9 @@ using System.Linq;
 namespace LuKaSo.MarketData.Ducascopy.Tests
 {
     [TestClass]
-    public class DucascopyDataFeedConfiguration
+    public class DucascopyInstrumentManagerTests
     {
-        private DucacopyDataFeedConfiguration _configuration;
+        private InstrumentManager<DucascopySymbol, DucascopyGroup> _instrumentManager;
         private Configuration _dataFeedConfiguration;
 
         [TestInitialize]
@@ -35,55 +37,22 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
                 }
             };
 
-            var configReader = new Mock<IConfigurationReader>();
+            var configReader = new Mock<IConfigurationReader<Configuration>>();
 
             configReader
                 .Setup(mk => mk.Read())
                 .Returns(_dataFeedConfiguration);
 
-            _configuration = new DucacopyDataFeedConfiguration(configReader.Object);
-        }
-
-        [TestMethod]
-        public void Symbols()
-        {
-            Assert.AreEqual(_dataFeedConfiguration.Symbols.Count(), _configuration.Symbols.Count());
-
-            var extractedSymbols = _configuration.Symbols
-                .Select(s => s.Name)
-                .Distinct()
-                .ToList();
-
-            var symbols = _dataFeedConfiguration.Symbols
-                .Keys
-                .ToList();
-
-            Assert.IsTrue(Enumerable.SequenceEqual(extractedSymbols, symbols));
-        }
-
-        [TestMethod]
-        public void Groups()
-        {
-            Assert.AreEqual(_dataFeedConfiguration.Groups.Count(), _configuration.Groups.Count());
-
-            var extractedGroups = _configuration.Groups
-                .Select(s => s.Name)
-                .Distinct()
-                .ToList();
-
-            var groups = _dataFeedConfiguration.Groups
-                .Keys
-                .ToList();
-
-            Assert.IsTrue(Enumerable.SequenceEqual(extractedGroups, groups));
+            var dataFeedConfiguration = new DucacopyDataFeedConfiguration(configReader.Object);
+            _instrumentManager = new InstrumentManager<DucascopySymbol, DucascopyGroup>(dataFeedConfiguration);
         }
 
         [TestMethod]
         public void TopLevelGroups()
         {
-            Assert.AreEqual(_dataFeedConfiguration.Groups.Where(g => string.IsNullOrEmpty(g.Value.Parent)).Count(), _configuration.TopLevelGroups.Count());
+            Assert.AreEqual(_dataFeedConfiguration.Groups.Count(g => string.IsNullOrEmpty(g.Value.Parent)), _instrumentManager.TopLevelGroups.Count());
 
-            var extractedGroups = _configuration.TopLevelGroups
+            var extractedGroups = _instrumentManager.TopLevelGroups
                 .Select(s => s.Name)
                 .Distinct()
                 .ToList();
@@ -103,7 +72,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
                 .ToList()
                 .ForEach(g =>
                 {
-                    var group = _configuration.Groups.Single(x => x.Name == g.Id);
+                    var group = _instrumentManager.Groups.Single(x => x.Name == g.Id);
                     var symbols = group.Symbols
                         .Select(s => s.Name)
                         .Distinct()
@@ -120,7 +89,7 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
                 .ToList()
                 .ForEach(g =>
                 {
-                    var group = _configuration.Groups.Single(x => x.Name == g.Id);
+                    var group = _instrumentManager.Groups.Single(x => x.Name == g.Id);
 
                     if (group.Parent != null)
                     {
@@ -140,14 +109,14 @@ namespace LuKaSo.MarketData.Ducascopy.Tests
                 .ToList()
                 .ForEach(s =>
                 {
-                    Assert.IsTrue(_configuration.IsSymbolExists(s.Key));
+                    Assert.IsTrue(_instrumentManager.IsSymbolExists(s.Key));
                 });
         }
 
         [TestMethod]
         public void SymbolNotExists()
         {
-            Assert.IsFalse(_configuration.IsSymbolExists("EURUSD"));
+            Assert.IsFalse(_instrumentManager.IsSymbolExists("EURUSD"));
         }
     }
 }

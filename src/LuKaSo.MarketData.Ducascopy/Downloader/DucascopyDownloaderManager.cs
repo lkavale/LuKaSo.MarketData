@@ -1,8 +1,7 @@
-﻿using LuKaSo.MarketData.Common.Extensions;
-using LuKaSo.MarketData.Ducascopy.Infrastructure;
-using LuKaSo.MarketData.Ducascopy.Instruments;
+﻿using LuKaSo.MarketData.Ducascopy.Instruments;
 using LuKaSo.MarketData.Infrastructure.Downloader;
 using LuKaSo.MarketData.Infrastructure.FileSystem;
+using LuKaSo.MarketData.Infrastructure.Instruments;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,17 +11,22 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
 {
     public class DucascopyDownloaderManager : IDownloaderManager
     {
-        private readonly IFileChecker<DucascopySymbol> _fileChecker;
+        private readonly IFileManager<DucascopySymbol> _fileManager;
         private readonly IFileDownloader _fileDownloader;
         private readonly IConfiguration _configuration;
-        private readonly IDataFeedConfiguration _dataFeedConfiguration;
+        private readonly IInstrumentManager<DucascopySymbol, DucascopyGroup> _instrumentManager;
 
-        public DucascopyDownloaderManager(IFileChecker<DucascopySymbol> fileChecker, IFileDownloader fileDownloader, IConfiguration configuration, IDataFeedConfiguration dataFeedConfiguration)
+        public DucascopyDownloaderManager(IFileManager<DucascopySymbol> fileManager, IFileDownloader fileDownloader, IConfiguration configuration, IInstrumentManager<DucascopySymbol, DucascopyGroup> instrumentManager)
         {
-            _fileChecker = fileChecker;
+            _fileManager = fileManager;
             _fileDownloader = fileDownloader;
             _configuration = configuration;
-            _dataFeedConfiguration = dataFeedConfiguration;
+            _instrumentManager = instrumentManager;
+        }
+
+        public bool HasSymbol(ISymbol symbol)
+        {
+            return symbol is DucascopySymbol;
         }
 
         public void Update(IList<IDownloaderItem> downloaderItems)
@@ -32,7 +36,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
                 .ToList()
                 .ForEach(d =>
                 {
-                    d.Files = _fileChecker.GetMissingFiles((DucascopySymbol)d.Symbol, d.DateFromDesired ?? d.DateFrom, d.DateToDesired ?? d.DateTo);
+                    d.Files = _fileManager.GetMissingFiles((DucascopySymbol)d.Symbol, d.DateFromDesired ?? d.DateFrom, d.DateToDesired ?? d.DateTo);
                 });
         }
 
@@ -40,7 +44,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
         {
             CheckedForAvailability(downloaderItem);
 
-            downloaderItem.Files = _fileChecker.GetMissingFiles((DucascopySymbol)downloaderItem.Symbol, downloaderItem.DateFromDesired ?? downloaderItem.DateFrom, downloaderItem.DateToDesired ?? downloaderItem.DateTo);
+            downloaderItem.Files = _fileManager.GetMissingFiles((DucascopySymbol)downloaderItem.Symbol, downloaderItem.DateFromDesired ?? downloaderItem.DateFrom, downloaderItem.DateToDesired ?? downloaderItem.DateTo);
         }
 
         public void Download(IList<IDownloaderItem> downloaderItems)
@@ -63,7 +67,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
 
             foreach (var file in downloaderItem.Files)
             {
-                _fileDownloader.DownloadFileAync(_configuration.BaseSource.Append(file.SourceFile), Path.Combine(_configuration.DataPath, file.DestinationFile)).GetAwaiter().GetResult();
+                _fileDownloader.DownloadFileAync(file.SourceFile, Path.Combine(_configuration.DataPath, file.DestinationFile)).GetAwaiter().GetResult();
                 downloaderItem.Indicator.Report(++i);
             }
 
@@ -72,7 +76,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader
 
         public void CheckedForAvailability(IDownloaderItem downloaderItem)
         {
-            if (!_dataFeedConfiguration.IsSymbolExists(downloaderItem.Symbol.Name))
+            if (!_instrumentManager.IsSymbolExists(downloaderItem.Symbol.Name))
             {
                 throw new ArgumentException($"Ducascopy does not provide data for symbol {downloaderItem.Symbol.Name}");
             }

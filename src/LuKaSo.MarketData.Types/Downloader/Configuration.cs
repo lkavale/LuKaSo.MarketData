@@ -1,6 +1,5 @@
 ﻿using LuKaSo.MarketData.Infrastructure.Downloader;
 using System;
-using System.IO;
 
 namespace LuKaSo.MarketData.Types.Downloader
 {
@@ -27,17 +26,6 @@ namespace LuKaSo.MarketData.Types.Downloader
             set
             {
                 _dataPath = value;
-            }
-        }
-
-        /// <summary>
-        /// Base source
-        /// </summary>
-        public Uri BaseSource
-        {
-            get
-            {
-                return new Uri("http://www.dukascopy.com/datafeed/");
             }
         }
     }

@@ -8,24 +8,39 @@ namespace LuKaSo.MarketData.Infrastructure.FileSystem
         where T : ISymbol
     {
         /// <summary>
-        /// Get start date of downloaded data
+        /// Get missing files for symbol
         /// </summary>
         /// <param name="symbol"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         /// <returns></returns>
-        DateTime GetStartDateTime(T symbol);
+        IEnumerable<IFile> GetMissingFiles(T symbol, DateTime start, DateTime end);
 
         /// <summary>
-        /// Get last date of downloaded data
+        /// Get date and times of missing files
         /// </summary>
         /// <param name="symbol"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         /// <returns></returns>
-        DateTime GetEndDateTime(T symbol);
+        IEnumerable<DateTime> GetMissingDates(T symbol, DateTime start, DateTime end);
 
         /// <summary>
-        /// Get date and times of downloaded files
+        /// Get exisiting files for symbol
         /// </summary>
         /// <param name="symbol"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         /// <returns></returns>
-        IEnumerable<DateTime> GetDateTimes(T symbol);
+        IEnumerable<IFile> GetExistingFiles(T symbol, DateTime start, DateTime end);
+
+        /// <summary>
+        /// Get date and times of existing files
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        IEnumerable<DateTime> GetExistingDates(T symbol, DateTime start, DateTime end);
     }
 }

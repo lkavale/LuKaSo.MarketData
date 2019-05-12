@@ -9,10 +9,5 @@ namespace LuKaSo.MarketData.Infrastructure.Downloader
         /// Default data path
         /// </summary>
         string DataPath { get; set; }
-
-        /// <summary>
-        /// Base source
-        /// </summary>
-        Uri BaseSource { get; }
     }
 }

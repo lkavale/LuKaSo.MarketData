@@ -1,6 +1,7 @@
-﻿using System;
+﻿using LuKaSo.MarketData.Infrastructure.Common;
+using System;
 using System.Text;
-using System.Threading;
+using System.Timers;
 
 namespace LuKaSo.MarketData.Common.ProgressReporter
 {
@@ -9,21 +10,71 @@ namespace LuKaSo.MarketData.Common.ProgressReporter
     /// </summary>
     public class ConsoleProgressReporter : CommonProgressReporter, IDisposable
     {
-        private const int blockCount = 10;
-        private readonly TimeSpan animationInterval = TimeSpan.FromSeconds(1.0 / 8);
-        private const string animation = @"|/-\";
+        /// <summary>
+        /// Status
+        /// </summary>
+        private ProgressReporterStatus _status;
 
-        private Timer timer;
+        public override ProgressReporterStatus Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                base.HandleStatusChange(_status, value);
+                _status = value;
 
-        private readonly double currentProgress = 0;
-        private string currentText = string.Empty;
-        private bool disposed = false;
+                UpdateProgress();
+            }
+        }
+
+        /// <summary>
+        /// Lock
+        /// </summary>
+        private readonly object _lock = new object();
+
+        /// <summary>
+        /// Is disposed
+        /// </summary>
+        private bool _disposed = false;
+
+        /// <summary>
+        /// Progressbar length
+        /// </summary>
+        private readonly int _progressBarLength;
+
+        /// <summary>
+        /// Timer
+        /// </summary>
+        private Timer _timer;
+
+        /// <summary>
+        /// Animation sequence
+        /// </summary>
+        private const string _animation = @"|/-\";
+
+        /// <summary>
+        /// Animation index
+        /// </summary>
         private int animationIndex = 0;
 
+        /// <summary>
+        /// Current displayed text
+        /// </summary>
+        private string currentText = string.Empty;
 
-        public ConsoleProgressReporter()
+       
+        public ConsoleProgressReporter(int progressBarLength, string taskName)
         {
+            _progressBarLength = progressBarLength;
+            Console.Write(taskName + ": ");
+        }
 
+        ~ConsoleProgressReporter()
+        {
+            Dispose(false);
         }
 
         /// <summary>
@@ -34,34 +85,49 @@ namespace LuKaSo.MarketData.Common.ProgressReporter
         {
             base.Start(totalItems);
 
-            timer = new Timer(TimerHandler);
+            _timer = new Timer(100);
+            _timer.Elapsed += Timer_Elapsed;
 
             // A progress bar is only for temporary display in a console window.
             // If the console output is redirected to a file, draw nothing.
             // Otherwise, we'll end up with a lot of garbage in the target file.
             if (!Console.IsOutputRedirected)
             {
-                ResetTimer();
+                _timer.Start();
             }
         }
 
-        private void TimerHandler(object state)
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            lock (timer)
+            UpdateProgress();
+        }
+
+        private void UpdateProgress()
+        {
+            if (_disposed)
             {
-                if (disposed)
+                return;
+            }
+
+            lock (_lock)
+            {
+                if (_status != ProgressReporterStatus.Running)
                 {
+                    _timer.Stop();
+                    UpdateText("Completed");
+
                     return;
                 }
 
-                int progressBlockCount = (int)(currentProgress * Progress / 100);
-                string text = string.Format("[{0}{1}] {2,3}% {3}",
-                    new string('#', progressBlockCount), new string('-', blockCount - progressBlockCount),
-                    (int)Progress,
-                    animation[animationIndex++ % animation.Length]);
-                UpdateText(text);
+                int passedChars = (int)(_progressBarLength * Progress / 100);
 
-                ResetTimer();
+                string text = string.Format("[{0}{2}{1}] {3}%",
+                    new string('#', passedChars),
+                    new string('-', _progressBarLength - passedChars),
+                    _animation[animationIndex++ % _animation.Length],
+                    (int)Progress);
+
+                UpdateText(text);
             }
         }
 
@@ -94,17 +160,30 @@ namespace LuKaSo.MarketData.Common.ProgressReporter
             currentText = text;
         }
 
-        private void ResetTimer()
-        {
-            timer.Change(animationInterval, TimeSpan.FromMilliseconds(-1));
-        }
-
+        /// <summary>
+        /// Dispose
+        /// </summary>
         public void Dispose()
         {
-            lock (timer)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            lock (_lock)
             {
-                disposed = true;
-                UpdateText(string.Empty);
+                if (_disposed)
+                {
+                    return;
+                }
+
+                _timer.Dispose();
+                _disposed = true;
             }
         }
     }

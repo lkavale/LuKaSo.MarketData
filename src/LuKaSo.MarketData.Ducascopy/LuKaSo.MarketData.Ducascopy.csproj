@@ -1,22 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DucascopyDataFeedConfiguration.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="DucascopyDataFeedConfiguration.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="LZMA-SDK" Version="18.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
     <PackageReference Include="morelinq" Version="3.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
@@ -24,7 +14,12 @@
   <ItemGroup>
     <ProjectReference Include="..\LuKaSo.MarketData.Common\LuKaSo.MarketData.Common.csproj" />
     <ProjectReference Include="..\LuKaSo.MarketData.Infrastructure\LuKaSo.MarketData.Infrastructure.csproj" />
-    <ProjectReference Include="..\LuKaSo.MarketData.Types\LuKaSo.MarketData.Types.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DucascopyDataFeedConfiguration.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

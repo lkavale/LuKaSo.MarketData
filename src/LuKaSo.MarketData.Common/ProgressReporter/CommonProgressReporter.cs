@@ -99,6 +99,11 @@ namespace LuKaSo.MarketData.Common.ProgressReporter
         {
             get
             {
+                if (TotalItems == 0)
+                {
+                    return 100d;
+                }
+
                 return 100 * (double)Items / (double)TotalItems;
             }
         }

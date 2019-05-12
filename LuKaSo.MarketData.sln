@@ -3,15 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Ducascopy", "src\LuKaSo.MarketData.Ducascopy\LuKaSo.MarketData.Ducascopy.csproj", "{6B269151-21B8-4CD8-9DA5-10799ABE203F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Ducascopy.Tests", "tests\LuKaSo.MarketData.Ducascopy.Tests\LuKaSo.MarketData.Ducascopy.Tests.csproj", "{124ACCB2-39E7-47BC-8D78-933F9370D747}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Infrastructure", "src\LuKaSo.MarketData.Infrastructure\LuKaSo.MarketData.Infrastructure.csproj", "{13FF34BB-8BE8-4428-989B-1B134119D444}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Types", "src\LuKaSo.MarketData.Types\LuKaSo.MarketData.Types.csproj", "{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Common", "src\LuKaSo.MarketData.Common\LuKaSo.MarketData.Common.csproj", "{EE206B99-931F-4F2B-AEC4-B153FE299CC0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Common.Tests", "tests\LuKaSo.MarketData.Common.Tests\LuKaSo.MarketData.Common.Tests.csproj", "{A45892F9-1844-416E-9E28-9B98BF718AE0}"
 EndProject
@@ -20,10 +12,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docs\Datafeed.md = docs\Datafeed.md
 		docs\Ducascopy.md = docs\Ducascopy.md
 		LICENSE = LICENSE
+		Pse.md = Pse.md
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lukaso.MarketData.Cli", "src\Lukaso.MarketData.Cli\Lukaso.MarketData.Cli.csproj", "{FC7F8448-CBA8-4C5D-8728-F9AE52469596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Common", "src\LuKaSo.MarketData.Common\LuKaSo.MarketData.Common.csproj", "{A01228F9-65A9-4DE8-B863-81AAFA8340EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Types", "src\LuKaSo.MarketData.Types\LuKaSo.MarketData.Types.csproj", "{B9383961-9F12-4EFD-BF40-750B2A70BFD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Infrastructure", "src\LuKaSo.MarketData.Infrastructure\LuKaSo.MarketData.Infrastructure.csproj", "{E63EB1BF-72D5-4AAE-96FE-967933D611C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Pse", "src\LuKaSo.MarketData.Pse\LuKaSo.MarketData.Pse.csproj", "{EC17E9A8-C8EB-40A3-AE8F-A14A0657FBDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Ducascopy", "src\LuKaSo.MarketData.Ducascopy\LuKaSo.MarketData.Ducascopy.csproj", "{AFFD3C9D-9584-4CFC-B98E-AC59DEA742B5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuKaSo.MarketData.Experiment", "src\LuKaSo.MarketData.Experiment\LuKaSo.MarketData.Experiment.csproj", "{0366F5A5-96B1-42AB-938C-002DFFCF6D76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuKaSo.MarketData.Pse.Tests", "tests\LuKaSo.MarketData.Pse.Tests\LuKaSo.MarketData.Pse.Tests.csproj", "{32E35E0F-51DB-49DE-816C-06396D9C25C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,26 +38,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6B269151-21B8-4CD8-9DA5-10799ABE203F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B269151-21B8-4CD8-9DA5-10799ABE203F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B269151-21B8-4CD8-9DA5-10799ABE203F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B269151-21B8-4CD8-9DA5-10799ABE203F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{124ACCB2-39E7-47BC-8D78-933F9370D747}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{124ACCB2-39E7-47BC-8D78-933F9370D747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{124ACCB2-39E7-47BC-8D78-933F9370D747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{124ACCB2-39E7-47BC-8D78-933F9370D747}.Release|Any CPU.Build.0 = Release|Any CPU
-		{13FF34BB-8BE8-4428-989B-1B134119D444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{13FF34BB-8BE8-4428-989B-1B134119D444}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{13FF34BB-8BE8-4428-989B-1B134119D444}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{13FF34BB-8BE8-4428-989B-1B134119D444}.Release|Any CPU.Build.0 = Release|Any CPU
-		{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59E7304F-0A96-4FB1-BCBB-7761DB754FDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EE206B99-931F-4F2B-AEC4-B153FE299CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE206B99-931F-4F2B-AEC4-B153FE299CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EE206B99-931F-4F2B-AEC4-B153FE299CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EE206B99-931F-4F2B-AEC4-B153FE299CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A45892F9-1844-416E-9E28-9B98BF718AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A45892F9-1844-416E-9E28-9B98BF718AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A45892F9-1844-416E-9E28-9B98BF718AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +50,34 @@ Global
 		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC7F8448-CBA8-4C5D-8728-F9AE52469596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A01228F9-65A9-4DE8-B863-81AAFA8340EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A01228F9-65A9-4DE8-B863-81AAFA8340EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A01228F9-65A9-4DE8-B863-81AAFA8340EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A01228F9-65A9-4DE8-B863-81AAFA8340EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9383961-9F12-4EFD-BF40-750B2A70BFD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9383961-9F12-4EFD-BF40-750B2A70BFD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9383961-9F12-4EFD-BF40-750B2A70BFD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9383961-9F12-4EFD-BF40-750B2A70BFD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E63EB1BF-72D5-4AAE-96FE-967933D611C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E63EB1BF-72D5-4AAE-96FE-967933D611C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E63EB1BF-72D5-4AAE-96FE-967933D611C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E63EB1BF-72D5-4AAE-96FE-967933D611C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC17E9A8-C8EB-40A3-AE8F-A14A0657FBDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC17E9A8-C8EB-40A3-AE8F-A14A0657FBDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC17E9A8-C8EB-40A3-AE8F-A14A0657FBDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC17E9A8-C8EB-40A3-AE8F-A14A0657FBDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFD3C9D-9584-4CFC-B98E-AC59DEA742B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFD3C9D-9584-4CFC-B98E-AC59DEA742B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFD3C9D-9584-4CFC-B98E-AC59DEA742B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFD3C9D-9584-4CFC-B98E-AC59DEA742B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0366F5A5-96B1-42AB-938C-002DFFCF6D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0366F5A5-96B1-42AB-938C-002DFFCF6D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0366F5A5-96B1-42AB-938C-002DFFCF6D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0366F5A5-96B1-42AB-938C-002DFFCF6D76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32E35E0F-51DB-49DE-816C-06396D9C25C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32E35E0F-51DB-49DE-816C-06396D9C25C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32E35E0F-51DB-49DE-816C-06396D9C25C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32E35E0F-51DB-49DE-816C-06396D9C25C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

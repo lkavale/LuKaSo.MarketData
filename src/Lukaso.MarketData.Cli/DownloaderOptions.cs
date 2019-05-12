@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using LuKaSo.MarketData.Ducascopy.Instruments;
+using LuKaSo.MarketData.Pse.Instruments;
 using LuKaSo.MarketData.Types.Downloader;
 using System;
 using System.Globalization;
@@ -7,8 +8,11 @@ using System.Globalization;
 namespace Lukaso.MarketData.Cli
 {
     [Verb("download", HelpText = "Download specified instrument market data.")]
-    public class DownloaderOption
+    public class DownloaderOptions
     {
+        [Option('s', "source", HelpText = "Data source.")]
+        public string Source { get; set; }
+
         [Option('i', "instrument", HelpText = "Instrument symbol.")]
         public string Instrument { get; set; }
 
@@ -20,12 +24,23 @@ namespace Lukaso.MarketData.Cli
 
         public DownloaderItem CreateDownloaderItem()
         {
-            return new DownloaderItem()
+            var item = new DownloaderItem()
             {
-                Symbol = new DucascopySymbol() { Name = Instrument, DirectoryName = Instrument },
                 DateFromDesired = DateTime.ParseExact(DateFrom, "yyyy-MM-dd", CultureInfo.InvariantCulture),
                 DateToDesired = DateTime.ParseExact(DateTo, "yyyy-MM-dd", CultureInfo.InvariantCulture)
             };
+
+            if (Source == "Ducascopy")
+            {
+                item.Symbol = new DucascopySymbol() { Name = Instrument, DirectoryName = Instrument };
+            }
+
+            if (Source == "Pse")
+            {
+                item.Symbol = new PseSymbol() { Name = Instrument};
+            }
+
+            return item;
         }
     }
 }

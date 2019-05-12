@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LuKaSo.MarketData.Ducascopy\LuKaSo.MarketData.Ducascopy.csproj" />
+    <ProjectReference Include="..\LuKaSo.MarketData.Pse\LuKaSo.MarketData.Pse.csproj" />
   </ItemGroup>
 
 </Project>

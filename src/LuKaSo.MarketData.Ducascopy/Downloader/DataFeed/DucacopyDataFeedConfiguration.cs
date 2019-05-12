@@ -1,6 +1,7 @@
 ﻿using LuKaSo.MarketData.Ducascopy.Downloader.DataFeed.Models;
 using LuKaSo.MarketData.Ducascopy.Infrastructure;
 using LuKaSo.MarketData.Ducascopy.Instruments;
+using LuKaSo.MarketData.Infrastructure.Downloader.DataFeed;
 using LuKaSo.MarketData.Infrastructure.Instruments;
 using MoreLinq;
 using System.Collections.Generic;
@@ -8,81 +9,33 @@ using System.Linq;
 
 namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
 {
-    public class DucacopyDataFeedConfiguration : IDataFeedConfiguration
+    public class DucacopyDataFeedConfiguration : IDataFeedConfiguration<DucascopySymbol, DucascopyGroup>
     {
         /// <summary>
         /// Symbols
         /// </summary>
-        private IEnumerable<DucascopySymbol> _symbols;
+        public IEnumerable<DucascopySymbol> Symbols { get; private set; }
 
         /// <summary>
         /// Groups
         /// </summary>
-        private IEnumerable<DucascopyGroup> _groups;
+        public IEnumerable<DucascopyGroup> Groups { get; private set; }
 
         /// <summary>
-        /// 
+        /// Constructor
         /// </summary>
         /// <param name="configurationReader"></param>
-        public DucacopyDataFeedConfiguration(IConfigurationReader configurationReader)
+        public DucacopyDataFeedConfiguration(IConfigurationReader<Configuration> configurationReader)
         {
             PrepareConfiguration(configurationReader.Read());
         }
 
         /// <summary>
-        /// Gets all symbols
+        /// Extract symbols from configuration
         /// </summary>
-        public IEnumerable<ISymbol> Symbols
-        {
-            get
-            {
-                return _symbols;
-            }
-        }
-
-        /// <summary>
-        /// Gets all groups
-        /// </summary>
-        public IEnumerable<IGroup> Groups
-        {
-            get
-            {
-                return _groups;
-            }
-        }
-
-        /// <summary>
-        /// Gets top level groups
-        /// </summary>
-        public IEnumerable<IGroup> TopLevelGroups
-        {
-            get
-            {
-                return _groups.Where(g => g.Parent == null);
-            }
-        }
-
-        /// <summary>
-        /// Contains symbol
-        /// </summary>
-        /// <param name="symbol"></param>
+        /// <param name="dataFeedConfiguration"></param>
         /// <returns></returns>
-        public bool IsSymbolExists(ISymbol symbol)
-        {
-            return _symbols.Contains(symbol);
-        }
-
-        /// <summary>
-        /// Contains symbol
-        /// </summary>
-        /// <param name="symbolName"></param>
-        /// <returns></returns>
-        public bool IsSymbolExists(string symbolName)
-        {
-            return _symbols.Any(s => s.Name == symbolName);
-        }
-
-        private IList<DucascopySymbol> ExtractSymbols(Configuration dataFeedConfiguration)
+        protected IEnumerable<DucascopySymbol> ExtractSymbols(Configuration dataFeedConfiguration)
         {
             return dataFeedConfiguration.Symbols
                 .Select(s => new DucascopySymbol()
@@ -95,11 +48,15 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
                     QuotaCurrency = s.Value.QuoteCurrency,
                     Digits = s.Value.GetDigits(),
                     StartDate = s.Value.GetStartDateByResolution(DataResolution.TickData)
-                })
-                .ToList();
+                });
         }
 
-        private IList<DucascopyGroup> ExtractGroups(Configuration dataFeedConfiguration)
+        /// <summary>
+        /// Extract groups from configuration
+        /// </summary>
+        /// <param name="dataFeedConfiguration"></param>
+        /// <returns></returns>
+        protected IEnumerable<DucascopyGroup> ExtractGroups(Configuration dataFeedConfiguration)
         {
             return dataFeedConfiguration.Groups
                  .Select(g => new DucascopyGroup()
@@ -107,23 +64,26 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
                      Id = g.Key,
                      Name = g.Value.Id,
                      Description = g.Value.Title
-                 })
-                 .ToList();
+                 });
         }
 
-        private void PrepareConfiguration(Configuration dataFeedConfiguration)
+        /// <summary>
+        /// Prepare data feed configuration
+        /// </summary>
+        /// <param name="dataFeedConfiguration"></param>
+        protected void PrepareConfiguration(Configuration dataFeedConfiguration)
         {
-            _symbols = ExtractSymbols(dataFeedConfiguration);
-            _groups = ExtractGroups(dataFeedConfiguration);
+            Symbols = ExtractSymbols(dataFeedConfiguration).ToList();
+            Groups = ExtractGroups(dataFeedConfiguration).ToList();
 
             dataFeedConfiguration.Groups
                 .ForEach(g =>
                 {
-                    var group = _groups.SingleOrDefault(x => x.Id == g.Key);
+                    var group = Groups.SingleOrDefault(x => x.Id == g.Key);
 
                     if (!string.IsNullOrEmpty(g.Value.Parent))
                     {
-                        var groupParent = _groups.SingleOrDefault(x => x.Id == g.Value.Parent);
+                        var groupParent = Groups.SingleOrDefault(x => x.Id == g.Value.Parent);
 
                         group.Parent = groupParent;
                         groupParent.Groups.Add(group);
@@ -131,7 +91,7 @@ namespace LuKaSo.MarketData.Ducascopy.Downloader.DataFeed
 
                     if (g.Value.Instruments.Any())
                     {
-                        group.Symbols = _symbols
+                        group.Symbols = Symbols
                             .Join(g.Value.Instruments,
                                 l => l.Id,
                                 r => r,

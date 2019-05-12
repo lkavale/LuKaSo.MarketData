@@ -15,7 +15,7 @@ namespace LuKaSo.MarketData.Common.Extensions
             relativePath = relativePath.TrimStart(new[] { '/', '\\' });
             var basePathString = basePath.ToString().TrimEnd(new[] { '/', '\\' });
 
-            return new Uri(basePathString + "/" + relativePath);
+            return new Uri(basePathString + '/' + relativePath);
         }
     }
 }

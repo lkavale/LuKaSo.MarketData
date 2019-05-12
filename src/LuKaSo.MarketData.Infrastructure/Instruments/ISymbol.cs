@@ -26,21 +26,6 @@ namespace LuKaSo.MarketData.Infrastructure.Instruments
         string QuotaCurrency { get; set; }
 
         /// <summary>
-        /// Directory name
-        /// </summary>
-        string DirectoryName { get; set; }
-
-        /// <summary>
-        /// Digits
-        /// </summary>
-        int Digits { get; set; }
-
-        /// <summary>
-        /// Start date
-        /// </summary>
-        DateTime StartDate { get; set; }
-
-        /// <summary>
         /// Group
         /// </summary>
         IList<IGroup> Groups { get; set; }
